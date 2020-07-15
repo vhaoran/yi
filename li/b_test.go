@@ -15,3 +15,13 @@ func Test_get_leap_month(t *testing.T) {
 		}
 	}
 }
+
+func Test_GetDaysByMonth(t *testing.T) {
+	for y := 2016; y < 2020; y++ {
+		fmt.Println("-----------", y, "----------")
+		for m := 1; m <= 12; m++ {
+			fmt.Print(m, ":", GetDaysByMonth(y, m), "/")
+		}
+		fmt.Println("")
+	}
+}
