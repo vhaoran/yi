@@ -25,3 +25,63 @@ func Test_36_parse(t *testing.T) {
 	}
 	fmt.Println("-----------------")
 }
+
+func Test_get_leap_month(t *testing.T) {
+	for i := 1974; i < 1990; i++ {
+		j := GetLeapMonth(i)
+		days := GetLeapDays(i)
+		fmt.Println("------", i, "-----------")
+		if j > 0 {
+			fmt.Println(" run: ", j, " :", days)
+		}
+	}
+}
+
+func Test_GetDaysByMonth(t *testing.T) {
+	for y := 2016; y < 2020; y++ {
+		fmt.Println("-----------", y, "----------")
+		for m := 1; m <= 12; m++ {
+			fmt.Print(m, ":", GetDaysByMonth(y, m), "/")
+		}
+		fmt.Println("")
+	}
+}
+
+func Test_jqMap(t *testing.T) {
+	l := jqMap()
+	//
+	for k, v := range l {
+		fmt.Println("----", k, ":", v*60000)
+	}
+}
+
+func Test_GetDateBySolar(t *testing.T) {
+	for year := 2000; year < 2020; year++ {
+		fmt.Println("-----------", year, "----------")
+		for m := 0; m < 12; m++ {
+			yy, mm, dd := GetDateBySolar(year, m*2)
+			s := fmt.Sprintf("(%d:%d-%d-%d) ", m, yy, mm, dd)
+			fmt.Print(s)
+		}
+		fmt.Println("")
+	}
+}
+
+func Test_GetDateByLunar(t *testing.T) {
+	for year := 2000; year < 2020; year++ {
+		fmt.Println("-----------", year, "----------")
+		for m := 1; m < 13; m++ {
+			yy, mm, dd := GetDateByLunar(year, m)
+			s := fmt.Sprintf("(%d:%d-%d-%d) ", m, yy, mm, dd)
+			fmt.Print(s)
+		}
+		fmt.Println("")
+	}
+}
+
+func Test_ToSolar(t *testing.T) {
+	y, m, d := new(ToSolar).GetSolarDate(2020, 7, 16)
+	fmt.Println("-----------------")
+	fmt.Println("------->---", y, " ", m, " ", d)
+
+}
