@@ -1,4 +1,4 @@
-package li
+package nbak
 
 import (
 	"github.com/vhaoran/vchat/common/ytime"
@@ -107,11 +107,11 @@ func (r *Tran2Lunar) days(Y, M, D int) int {
 //	}
 //
 //	val := 0
-//	li := 0
+//	nbak := 0
 //	while(l--) {
-//		li = data[l].split("=")
-//		val = li[1].split("|")
-//		match(Y, M, D, li[0]) && (y = y + ~~(val[0]), m = m + ~~(val[1]), d = d + ~~(val[2]))
+//		nbak = data[l].split("=")
+//		val = nbak[1].split("|")
+//		match(Y, M, D, nbak[0]) && (y = y + ~~(val[0]), m = m + ~~(val[1]), d = d + ~~(val[2]))
 //	}
 //
 //	return
