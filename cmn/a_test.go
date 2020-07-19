@@ -5,12 +5,22 @@ import (
 	"testing"
 
 	"github.com/6tail/lunar-go/calendar"
+	"github.com/vhaoran/vchat/common/ytime"
 )
 
+//solar
 func Test_a(t *testing.T) {
-	lunar := calendar.NewLunarFromYmd(2004, 9, 25)
+	y, m, d := 2020, 2, 3
+	dt := ytime.OfInt(y, m, d).Time
+	lunar := calendar.NewLunarFromDate(dt)
 	fmt.Println(lunar.ToFullString())
+	fmt.Println("-----------------")
 	fmt.Println(lunar.GetSolar().ToFullString())
+	fmt.Println("-----------------")
+	fmt.Println(lunar.GetJie())
+	fmt.Println("-----------------")
+	fmt.Println(lunar.GetJieQiTable())
+	fmt.Println("-----------------")
 }
 
 // 家国取四柱

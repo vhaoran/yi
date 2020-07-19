@@ -6,6 +6,7 @@ import (
 )
 
 type (
+	//地支合会
 	DiZhiHeHuiGet struct {
 	}
 )
@@ -50,7 +51,7 @@ var sanHui_KV = cmn.KV{
 	"申酉戌": "金",
 }
 
-var banHe_KV = cmn.KV{
+var shengDiBanHe_KV = cmn.KV{
 	"申子": "水",
 	"亥卯": "木",
 	"寅午": "火",
@@ -65,138 +66,40 @@ var muDiBanHe_KV = cmn.KV{
 }
 
 //取地支三合
-func (r *DiZhiHeHuiGet) GetSanHe(z *SiZhuModel) []*HeModel {
-	ret := make([]*HeModel, 0)
-
-	l := z.ZhiList()
-	for k1, v1 := range l {
-		for k2, v2 := range l {
-			if k1 == k2 {
-				continue
-			}
-			for k3, v3 := range l {
-				if k2 == k3 {
-					continue
-				}
-
-				if heWuXing := r.he(sanHe_KV, v1, v2, v3); len(heWuXing) > 0 {
-					ret = append(ret, &HeModel{
-						He:          v1 + v2,
-						HeHuaWuXing: heWuXing,
-					})
-				}
-			}
-		}
-	}
-
-	return ret
+func (r *DiZhiHeHuiGet) GetSanHe(lstDiZhi ...string) []*HeModel {
+	return r.match(sanHe_KV, lstDiZhi...)
 }
 
 //得到地支三会
-func (r *DiZhiHeHuiGet) GetSanHui(z *SiZhuModel) []*HeModel {
+func (r *DiZhiHeHuiGet) GetSanHui(lstDiZhi ...string) []*HeModel {
+	return r.match(sanHui_KV, lstDiZhi...)
+}
+
+func (r *DiZhiHeHuiGet) GetLiuHe(lstDiZhi ...string) []*HeModel {
+	return r.match(liuHe_KV, lstDiZhi...)
+}
+
+func (r *DiZhiHeHuiGet) GetShenDiBanHe(lstDiZhi ...string) []*HeModel {
+	return r.match(shengDiBanHe_KV, lstDiZhi...)
+}
+
+func (r *DiZhiHeHuiGet) GetMuDiBanHe(lstDiZhi ...string) []*HeModel {
+	return r.match(muDiBanHe_KV, lstDiZhi...)
+}
+
+//二支合的情况
+func (r *DiZhiHeHuiGet) match(patKV cmn.KV, lstDiZhi ...string) []*HeModel {
 	ret := make([]*HeModel, 0)
 
-	l := z.ZhiList()
-	for k1, v1 := range l {
-		for k2, v2 := range l {
-			if k1 == k2 {
-				continue
-			}
-			for k3, v3 := range l {
-				if k2 == k3 {
-					continue
-				}
-
-				if heWuXing := r.he(sanHui_KV, v1, v2, v3); len(heWuXing) > 0 {
-					ret = append(ret, &HeModel{
-						He:          v1 + v2,
-						HeHuaWuXing: heWuXing,
-					})
-				}
-			}
+	for key, wuxing := range patKV {
+		ok := cmn.StrEachInSlice(key, lstDiZhi...)
+		if ok {
+			ret = append(ret, &HeModel{
+				He:          key,
+				HeHuaWuXing: wuxing,
+			})
 		}
 	}
 
 	return ret
-}
-
-func (r *DiZhiHeHuiGet) GetLiuHe(z *SiZhuModel) []*HeModel {
-	ret := make([]*HeModel, 0)
-
-	l := z.ZhiList()
-	for k, src := range l {
-		for k1, dst := range l {
-			if k == k1 {
-				continue
-			}
-			if heWuXing := r.he(liuHe_KV, src, dst); len(heWuXing) > 0 {
-				ret = append(ret, &HeModel{
-					He:          src + dst,
-					HeHuaWuXing: heWuXing,
-				})
-			}
-		}
-	}
-
-	return ret
-}
-
-func (r *DiZhiHeHuiGet) GetShenDiBanHe(z *SiZhuModel) []*HeModel {
-	ret := make([]*HeModel, 0)
-
-	l := z.ZhiList()
-	for k, src := range l {
-		for k1, dst := range l {
-			if k == k1 {
-				continue
-			}
-			if heWuXing := r.he(banHe_KV, src, dst); len(heWuXing) > 0 {
-				ret = append(ret, &HeModel{
-					He:          src + dst,
-					HeHuaWuXing: heWuXing,
-				})
-			}
-		}
-	}
-
-	return ret
-}
-
-func (r *DiZhiHeHuiGet) GetMuDiBanHe(z *SiZhuModel) []*HeModel {
-	ret := make([]*HeModel, 0)
-
-	l := z.ZhiList()
-	for k, src := range l {
-		for k1, dst := range l {
-			if k == k1 {
-				continue
-			}
-			if heWuXing := r.he(muDiBanHe_KV, src, dst); len(heWuXing) > 0 {
-				ret = append(ret, &HeModel{
-					He:          src + dst,
-					HeHuaWuXing: heWuXing,
-				})
-			}
-		}
-	}
-
-	return ret
-}
-
-//l 最多有三个
-func (r *DiZhiHeHuiGet) he(m cmn.KV, l ...string) (heWuXing string) {
-	heWuXing = ""
-
-	//--------dst -----------------------------
-	dst := ""
-	for _, str := range l {
-		dst += str
-	}
-
-	//--------match -----------------------------
-	s, ok := liuHe_KV[dst]
-	if ok {
-		return s
-	}
-	return ""
 }

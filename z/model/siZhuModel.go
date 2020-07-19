@@ -2,6 +2,20 @@ package model
 
 type (
 	SiZhuModel struct {
+		//solar
+		YYYY   int
+		MM     int
+		DD     int
+		HH     int
+		Minute int
+
+		//lunar
+		Nian int
+		Yue  int
+		Ri   int
+		Shi  string
+
+		//gan/zhi
 		NianGan string
 		NianZhi string
 		YueGan  string

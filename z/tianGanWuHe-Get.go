@@ -1,6 +1,7 @@
 package z
 
 import (
+	"github.com/vhaoran/yi/cmn"
 	. "github.com/vhaoran/yi/z/model"
 )
 
@@ -11,7 +12,7 @@ type (
 
 var TiGanWuHeX = new(TiGanWuHe)
 
-var tianGanWuHe = KV{
+var tianGanWuHe = cmn.KV{
 	"甲己": "土",
 	"乙庚": "金",
 	"丙辛": "水",
@@ -23,20 +24,19 @@ func (r *TiGanWuHe) Get(z *SiZhuModel) []*TianGanWuHeModel {
 	l := make([]*TianGanWuHeModel, 0)
 	//
 	a := []string{z.NianGan, z.YueGan, z.RiGan, z.ShiGan}
-	for k, src := range a {
-		for k1, dst := range a {
-			if k == k1 {
+	for k1, v1 := range a {
+		for k2, v2 := range a {
+			if k1 == k2 {
 				continue
 			}
-			heWuXin := r.he(src, dst)
+			heWuXin := r.he(v1, v2)
 			if len(heWuXin) == 0 {
 				continue
 			}
-			bean := &TianGanWuHeModel{
-				He:         src + dst,
+			l = append(l, &TianGanWuHeModel{
+				He:         v1 + v2,
 				HeHuaWuXin: heWuXin,
-			}
-			l = append(l, bean)
+			})
 		}
 	}
 	return l
