@@ -1,7 +1,7 @@
 package cmn
 
 //todo
-//"子丑寅卯辰巳午未申酉戌亥"}
+//{"子丑寅卯辰巳午未申酉戌亥"}
 var LiChu_KV = map[int]string{
 	//"子丑寅卯辰巳午未申酉戌亥"}
 	1930: "戌",
