@@ -48,7 +48,7 @@ func GetWuXing(ganOrZi string) string {
 func Sheng(a, b string) bool {
 	xa, xb := GetWuXing(a), GetWuXing(b)
 
-	//WuXing = []string{
+	//WuXing_list = []string{
 	//"金", "木", "水", "火", "土"}
 	m := KV{
 		"金": "水",
@@ -67,7 +67,7 @@ func Sheng(a, b string) bool {
 }
 
 func Ke(a, b string) bool {
-	//WuXing = []string{"金", "木", "水", "火", "土"}
+	//WuXing_list = []string{"金", "木", "水", "火", "土"}
 	xa, xb := GetWuXing(a), GetWuXing(b)
 
 	m := KV{
