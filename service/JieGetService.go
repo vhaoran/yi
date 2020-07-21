@@ -3,8 +3,6 @@ package service
 import (
 	"fmt"
 	"time"
-
-	"github.com/vhaoran/yi/service/impl"
 )
 
 type (
@@ -20,7 +18,7 @@ type (
 
 //小han调整过的节
 func GetJie(solarYear int) []*JieData {
-	return new(impl.JieGetImpl).Exec(solarYear)
+	return new(JieGetImpl).Exec(solarYear)
 }
 
 //得到立春的时间

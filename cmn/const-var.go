@@ -7,3 +7,22 @@ var (
 )
 
 type KV map[string]string
+
+func GanIndex(gan string) int {
+	for i, v := range Gan_list {
+		if v == gan {
+			return i
+		}
+	}
+	return -1
+}
+
+func ZhiIndex(zhi string) int {
+	for i, v := range Zhi_list {
+		if v == zhi {
+			return i
+		}
+	}
+	
+	return -1
+}

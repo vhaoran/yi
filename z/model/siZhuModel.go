@@ -8,6 +8,8 @@ import (
 
 type (
 	SiZhuModel struct {
+		//男性
+		IsMale bool
 		//solar
 		YYYY   int
 		MM     int

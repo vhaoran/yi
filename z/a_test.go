@@ -7,20 +7,39 @@ import (
 	"github.com/davecgh/go-spew/spew"
 
 	"github.com/vhaoran/yi/cmn"
+	"github.com/vhaoran/yi/service"
 )
 
 func Test_get_na_yin(t *testing.T) {
 	for y := 1970; y <= 2030; y++ {
 		//d := calendar.NewSolarFromYmd(y,5,1)
-		gz := cmn.GetYearGanZi(y)
-		naYin := new(NaYinGet).Get(gz)
+		g, z := cmn.GetNianGanZhi(y)
+		naYin := new(NaYinGet).Get(g + z)
 		wuxing := new(NaYinGet).GetWuXin(naYin)
-		fmt.Println(y, "---", gz, ",", naYin, wuxing)
+		fmt.Println(y, "---", g+z, ",", naYin, wuxing)
 	}
 }
-func TestBaZiGet_GetBySolar(t *testing.T) {
-	y, m, d, h, mm := 1970, 12, 14, 23, 30
-	z := BaZiGetX.GetBySolar(y, m, d, h, mm)
+
+func Test_bz_get(t *testing.T) {
+	y, m, d, h, minute := 1970, 12, 14, 4, 50
+	bz := BaZiGetX.FromSolar(y, m, d, h, minute)
+	//
 	fmt.Println("-----------------")
-	spew.Dump(z)
+
+	spew.Dump(bz)
+	fmt.Println("-----------------")
+
+	l := service.GetJie(1970)
+	for i, v := range l {
+		fmt.Println(i+1, " --- ", v.ToString())
+	}
+	fmt.Println("-----------------")
+	nianShu, yueShu := new(QiYunGet).Call(bz)
+	fmt.Println("起运", nianShu, " 年", yueShu, "月")
+	fmt.Println("-----------------")
+	lguiren := new(GuiRenGet).Call(bz)
+	//
+	for _, v := range lguiren {
+		fmt.Println(v.ToString())
+	}
 }

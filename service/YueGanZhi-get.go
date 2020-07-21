@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	nian_yue_start := cmn.KV{
+	//年上启月
+	nianShangQiYue_map = cmn.KV{
 		//甲乙丙丁戊己庚辛壬癸}
 		"甲": "丙丁戊己庚辛壬癸甲乙丙丁",
 		"己": "丙丁戊己庚辛壬癸甲乙丙丁",
@@ -25,10 +26,10 @@ var (
 //尽量不使用库
 func GetYueGanZhi(lunarNian, lunarYue int) (gan, zhi string) {
 	//
-	nianGan := cmn.GetYearGan(lunarNian)
+	nianGan, _ := cmn.GetNianGanZhi(lunarNian)
 	//nianZhi := cmn.GetYearZhi(lunarNian)
-	//
-	s, ok := nian_yue_start[nianGan]
+	//FriendReqDispose
+	s, ok := nianShangQiYue_map[nianGan]
 	if !ok {
 		//
 	}
@@ -37,6 +38,7 @@ func GetYueGanZhi(lunarNian, lunarYue int) (gan, zhi string) {
 	l := strings.Split(s, "")
 	gan = l[lunarYue-1]
 	//
-	zhi = cmn.Zhi_list[lunarYue-1]
+	yueList := []string{"寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥", "子", "丑"}
+	zhi = yueList[lunarYue-1]
 	return
 }
