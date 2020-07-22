@@ -37,9 +37,16 @@ func Test_bz_get(t *testing.T) {
 	nianShu, yueShu := new(QiYunGet).Call(bz)
 	fmt.Println("起运", nianShu, " 年", yueShu, "月")
 	fmt.Println("-----------------")
+	//--------guiren -----------------------------
 	lguiren := new(GuiRenGet).Call(bz)
-	//
 	for _, v := range lguiren {
 		fmt.Println(v.ToString())
 	}
+
+	//--------xiongsheng -----------------------------
+	lXiongShen := new(XiongShenGet).Call(bz)
+	for _, v := range lXiongShen {
+		fmt.Println(v.ToString())
+	}
+
 }

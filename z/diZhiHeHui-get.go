@@ -5,12 +5,19 @@ import (
 	. "github.com/vhaoran/yi/z/model"
 )
 
+//----------------------------------------------------
+// auth: whr  date:2020/7/2216:27--------------------------
+// ####请勿擅改此功能代码####
+// 用途：地无分析，主要分析地支合会
+//---------------------------------------------
+
 type (
 	//地支合会
 	DiZhiHeHuiGet struct {
 	}
 )
 
+/*   地支合会的情况 */
 var DiZhiHeHuiGetX = new(DiZhiHeHuiGet)
 
 var liuHe_KV = cmn.KV{

@@ -1,26 +1,26 @@
 package z
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/vhaoran/yi/cmn"
 	"github.com/vhaoran/yi/z/model"
 )
 
+//----------------------------------------------------
+// auth: whr  date:2020/7/2216:31--------------------------
+// ####请勿擅改此功能代码####
+// 用途：吉神分析
+//---------------------------------------------
+
 type (
 	GuiRenGet struct {
 	}
 
 	GuiRenData struct {
-		Name    string
-		Comment string
+		model.KVRoot
 	}
 )
-
-func (r *GuiRenData) ToString() string {
-	return fmt.Sprint(r.Name, "(", r.Comment, ")")
-}
 
 func (r *GuiRenGet) Call(z *model.SiZhuModel) []*GuiRenData {
 	ret := make([]*GuiRenData, 0)
@@ -351,8 +351,10 @@ func (r *GuiRenGet) match(m cmn.KV, guirenName, key string, l ...string) []*GuiR
 	for _, sub := range l {
 		if strings.Contains(s, sub) {
 			ret = append(ret, &GuiRenData{
-				Name:    guirenName,
-				Comment: key + s,
+				KVRoot: model.KVRoot{
+					Name:    guirenName,
+					Comment: key + s,
+				},
 			})
 		}
 	}
