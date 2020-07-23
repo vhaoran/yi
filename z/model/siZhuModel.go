@@ -35,6 +35,19 @@ type (
 	}
 )
 
+func (r *SiZhuModel) NianZhu() string {
+	return r.NianGan + r.NianZhi
+}
+func (r *SiZhuModel) YueZhu() string {
+	return r.YueGan + r.YueZhi
+}
+func (r *SiZhuModel) RiZhu() string {
+	return r.RiGan + r.RiZhi
+}
+func (r *SiZhuModel) ShiZhu() string {
+	return r.ShiGan + r.ShiZhi
+}
+
 func (r *SiZhuModel) GanList() []string {
 	return []string{r.NianGan, r.YueGan, r.RiGan, r.ShiGan}
 }

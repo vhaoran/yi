@@ -72,6 +72,30 @@ var muDiBanHe_KV = cmn.KV{
 	"酉丑": "金",
 }
 
+func (r *DiZhiHeHuiGet) Get(z *SiZhuModel) []*HeModel {
+	ret := make([]*HeModel, 0)
+	if l := r.GetLiuHe(z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+		ret = append(ret, l...)
+	}
+
+	if l := r.GetMuDiBanHe(z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+		ret = append(ret, l...)
+	}
+
+	if l := r.GetSanHe(z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+		ret = append(ret, l...)
+	}
+
+	if l := r.GetSanHui(z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+		ret = append(ret, l...)
+	}
+
+	if l := r.GetShenDiBanHe(z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+		ret = append(ret, l...)
+	}
+	return ret
+}
+
 //取地支三合
 func (r *DiZhiHeHuiGet) GetSanHe(lstDiZhi ...string) []*HeModel {
 	return r.match(sanHe_KV, lstDiZhi...)

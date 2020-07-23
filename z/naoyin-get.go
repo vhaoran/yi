@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/vhaoran/yi/cmn"
+	. "github.com/vhaoran/yi/z/model"
 )
 
 type (
@@ -76,7 +77,41 @@ var mNaYin = cmn.KV{
 	"癸亥": "大海水",
 }
 
-func (r *NaYinGet) Get(ganZi string) string {
+func (r *NaYinGet) Get(z *SiZhuModel) []*KVRoot {
+	ret := make([]*KVRoot, 0)
+	//--------nian -----------------------------
+	if str := r.GetSingle(z.NianZhu()); len(str) > 0 {
+		ret = append(ret, &KVRoot{
+			Name:    z.NianZhu(),
+			Comment: str,
+		})
+	}
+	//--------yue -----------------------------
+	if str := r.GetSingle(z.YueZhu()); len(str) > 0 {
+		ret = append(ret, &KVRoot{
+			Name:    z.YueZhu(),
+			Comment: str,
+		})
+	}
+	//--------ri -----------------------------
+	if str := r.GetSingle(z.RiZhu()); len(str) > 0 {
+		ret = append(ret, &KVRoot{
+			Name:    z.RiZhu(),
+			Comment: str,
+		})
+	}
+	//--------shi -----------------------------
+	if str := r.GetSingle(z.ShiZhu()); len(str) > 0 {
+		ret = append(ret, &KVRoot{
+			Name:    z.ShiZhu(),
+			Comment: str,
+		})
+	}
+
+	return ret
+}
+
+func (r *NaYinGet) GetSingle(ganZi string) string {
 	s, ok := mNaYin[ganZi]
 	if ok {
 		return s

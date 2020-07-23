@@ -27,17 +27,17 @@ func (r *ShiShenGet) Get(z *SiZhuModel) *ShiShenModel {
 	}
 	riGan := z.RiGan
 	bean := &ShiShenModel{
-		NianGan: r.getSingle(riGan, z.NianGan),
-		YunGan:  r.getSingle(riGan, z.YueGan),
+		NianGan: r.GetSingle(riGan, z.NianGan),
+		YueGan:  r.GetSingle(riGan, z.YueGan),
 		RiGan:   "日",
-		ShiGan:  r.getSingle(riGan, z.ShiGan),
+		ShiGan:  r.GetSingle(riGan, z.ShiGan),
 	}
 	return bean
 }
 
 //ganOrZhi干或支
 //other 其它幹或支
-func (r *ShiShenGet) getSingle(ganOrZhi, other string) string {
+func (r *ShiShenGet) GetSingle(ganOrZhi, other string) string {
 	rx, same := cmn.GetRX(ganOrZhi, other)
 	if rx == cmn.RX_WoSheng {
 		if same {
