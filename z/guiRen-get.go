@@ -17,13 +17,13 @@ type (
 	GuiRenGet struct {
 	}
 
-	GuiRenData struct {
+	GuiRenItem struct {
 		model.KVRoot
 	}
 )
 
-func (r *GuiRenGet) Call(z *model.SiZhuModel) []*GuiRenData {
-	ret := make([]*GuiRenData, 0)
+func (r *GuiRenGet) Call(z *model.SiZhuModel) []*GuiRenItem {
+	ret := make([]*GuiRenItem, 0)
 
 	//-------- -----------------------------
 	l := r.TianDe(z.YueZhi, z.NianZhi, z.RiZhi, z.ShiZhi)
@@ -111,7 +111,7 @@ func (r *GuiRenGet) Call(z *model.SiZhuModel) []*GuiRenData {
 //
 //天德贵人,月支上与其它二支的组合
 //l为其它柱的天十和地址，包括月上的地支
-func (r *GuiRenGet) TianDe(yueZhi string, lZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) TianDe(yueZhi string, lZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -133,7 +133,7 @@ func (r *GuiRenGet) TianDe(yueZhi string, lZhi ...string) []*GuiRenData {
 }
 
 //月德貴人,查其它支的干，包括月干
-func (r *GuiRenGet) YueDe(yueZhi string, lGan ...string) []*GuiRenData {
+func (r *GuiRenGet) YueDe(yueZhi string, lGan ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -159,7 +159,7 @@ func (r *GuiRenGet) YueDe(yueZhi string, lGan ...string) []*GuiRenData {
 
 //天乙貴人
 //lZhi,其它支，其4个支
-func (r *GuiRenGet) TianYi(nianOrRiGan string, lZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) TianYi(nianOrRiGan string, lZhi ...string) []*GuiRenItem {
 	//甲、戊年日干见支中丑、未；
 	//乙、己年日干见支中子、申；
 	//丙、丁年日干见支中亥、酉；
@@ -179,7 +179,7 @@ func (r *GuiRenGet) TianYi(nianOrRiGan string, lZhi ...string) []*GuiRenData {
 }
 
 //十干禄
-func (r *GuiRenGet) ShiGanLu(riGan string, lZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) ShiGanLu(riGan string, lZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -203,7 +203,7 @@ func (r *GuiRenGet) ShiGanLu(riGan string, lZhi ...string) []*GuiRenData {
 }
 
 //文昌
-func (r *GuiRenGet) WenChang(nianOrRiGan string, lZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) WenChang(nianOrRiGan string, lZhi ...string) []*GuiRenItem {
 	//甲乙 见巳或午
 	//丙戊 见 申\
 	//丁已 见 酉
@@ -228,7 +228,7 @@ func (r *GuiRenGet) WenChang(nianOrRiGan string, lZhi ...string) []*GuiRenData {
 }
 
 //华盖,
-func (r *GuiRenGet) HuaGai(nianOrRiZhi string, otherZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) HuaGai(nianOrRiZhi string, otherZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	m := cmn.KV{
 		"寅": "戌",
@@ -252,7 +252,7 @@ func (r *GuiRenGet) HuaGai(nianOrRiZhi string, otherZhi ...string) []*GuiRenData
 }
 
 //将星,
-func (r *GuiRenGet) JiangXing(nianOrRiZhi string, otherZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) JiangXing(nianOrRiZhi string, otherZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	m := cmn.KV{
 		"寅": "午",
@@ -276,7 +276,7 @@ func (r *GuiRenGet) JiangXing(nianOrRiZhi string, otherZhi ...string) []*GuiRenD
 }
 
 //驿马,
-func (r *GuiRenGet) YiMa(nianOrRiZhi string, otherZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) YiMa(nianOrRiZhi string, otherZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	m := cmn.KV{
 		"寅": "申",
@@ -300,7 +300,7 @@ func (r *GuiRenGet) YiMa(nianOrRiZhi string, otherZhi ...string) []*GuiRenData {
 }
 
 //金舆
-func (r *GuiRenGet) JinYu(riGan string, l4Zhi ...string) []*GuiRenData {
+func (r *GuiRenGet) JinYu(riGan string, l4Zhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -320,7 +320,7 @@ func (r *GuiRenGet) JinYu(riGan string, l4Zhi ...string) []*GuiRenData {
 }
 
 //天医路人
-func (r *GuiRenGet) TianYiGuiRen(yueZhi string, otherZhi ...string) []*GuiRenData {
+func (r *GuiRenGet) TianYiGuiRen(yueZhi string, otherZhi ...string) []*GuiRenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -341,16 +341,16 @@ func (r *GuiRenGet) TianYiGuiRen(yueZhi string, otherZhi ...string) []*GuiRenDat
 	return r.match(m, "天医贵人", yueZhi, otherZhi...)
 }
 
-func (r *GuiRenGet) match(m cmn.KV, guirenName, key string, l ...string) []*GuiRenData {
+func (r *GuiRenGet) match(m cmn.KV, guirenName, key string, l ...string) []*GuiRenItem {
 	s, ok := m[key]
 	if !ok {
 		return nil
 	}
 
-	ret := make([]*GuiRenData, 0)
+	ret := make([]*GuiRenItem, 0)
 	for _, sub := range l {
 		if strings.Contains(s, sub) {
-			ret = append(ret, &GuiRenData{
+			ret = append(ret, &GuiRenItem{
 				KVRoot: model.KVRoot{
 					Name:    guirenName,
 					Comment: key + s,

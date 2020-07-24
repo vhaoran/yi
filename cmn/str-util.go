@@ -16,3 +16,12 @@ func StrEachInSlice(s string, l ...string) bool {
 	}
 	return ok
 }
+
+func StrIndexOfSlice(elem string, l ...string) int {
+	for i, v := range l {
+		if elem == v {
+			return i
+		}
+	}
+	return -1
+}

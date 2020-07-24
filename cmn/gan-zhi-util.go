@@ -38,6 +38,11 @@ func GetNianGanZhi(lunarYear int) (gan, zhi string) {
 	gIdx := (offset%10 + 6) % 10
 	zIdx := offset % 12
 	gan, zhi = g[gIdx], z[zIdx]
+
+	//
+
+
+
 	return
 }
 

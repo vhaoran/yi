@@ -27,50 +27,10 @@ func (r *ShiShenGet) Get(z *SiZhuModel) *ShiShenModel {
 	}
 	riGan := z.RiGan
 	bean := &ShiShenModel{
-		NianGan: r.GetSingle(riGan, z.NianGan),
-		YueGan:  r.GetSingle(riGan, z.YueGan),
+		NianGan: cmn.GetShiShen(riGan, z.NianGan),
+		YueGan:  cmn.GetShiShen(riGan, z.YueGan),
 		RiGan:   "日",
-		ShiGan:  r.GetSingle(riGan, z.ShiGan),
+		ShiGan:  cmn.GetShiShen(riGan, z.ShiGan),
 	}
 	return bean
-}
-
-//ganOrZhi干或支
-//other 其它幹或支
-func (r *ShiShenGet) GetSingle(ganOrZhi, other string) string {
-	rx, same := cmn.GetRX(ganOrZhi, other)
-	if rx == cmn.RX_WoSheng {
-		if same {
-			return "食神"
-		}
-		return "伤官"
-	}
-	if rx == cmn.RX_ShengWo {
-		if same {
-			return "偏印"
-		}
-		return "正印"
-	}
-
-	//-------- -----------------------------
-	if rx == cmn.RX_KeWo {
-		if same {
-			return "偏官"
-		}
-		return "正官"
-	}
-	if rx == cmn.RX_WoKe {
-		if same {
-			return "偏财"
-		}
-		return "正财"
-	}
-	//
-	if rx == cmn.RX_TongWo {
-		if same {
-			return "比肩"
-		}
-		return "劫财"
-	}
-	return ""
 }

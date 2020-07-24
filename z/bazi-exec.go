@@ -1,7 +1,7 @@
 package z
 
 import (
-	"github.com/vhaoran/yi/z/model"
+	. "github.com/vhaoran/yi/z/model"
 )
 
 type (
@@ -11,6 +11,6 @@ type (
 
 var PaiBaExecX = new(PaiBaExec)
 
-func (r *PaiBaExec) Exec(z *model.SiZhuModel) {
- 
+func (r *PaiBaExec) Exec(z *SiZhuModel) {
+
 }

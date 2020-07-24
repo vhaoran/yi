@@ -22,6 +22,7 @@ const (
 	RX_TongWo = 5
 )
 
+//得到天干 、地支的五行
 func GetWuXing(ganOrZi string) string {
 	//"金","木","水","火","土"
 	m := KV{

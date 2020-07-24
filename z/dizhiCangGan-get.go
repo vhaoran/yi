@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/vhaoran/yi/cmn"
-	"github.com/vhaoran/yi/z/model"
+	. "github.com/vhaoran/yi/z/model"
 )
 
 //----------------------------------------------------
@@ -28,38 +28,64 @@ import (
 //的效果:就是每柱中的天、地、人
 //---------------------------------------------
 type (
-	DiZhiCanGanGet struct {
+	DiZhiCangGanGet struct {
 	}
-	DiZhiCanGanData struct {
+	DiZhiCangGanData struct {
 		Name    string
-		GanList []string
+		GanList []*KVRoot
 	}
 )
 
-func (r *DiZhiCanGanData) ToString() string {
-	str := strings.Join(r.GanList, ",")
+func (r *DiZhiCangGanData) ToString() string {
+	str := ""
+	for _, v := range r.GanList {
+		if len(str) == 0 {
+			str = v.ToString()
+			continue
+		}
+		str += "," + v.ToString()
+	}
+
+	//-------- -----------------------------
 	s := fmt.Sprint(r.Name, "(", str, ")")
 	return s
 }
 
-var DiZhiCanGanGetX = new(DiZhiCanGanGet)
+var DiZhiCanGanGetX = new(DiZhiCangGanGet)
 
 //获取四柱中十神藏干
-func (r *DiZhiCanGanGet) Get(z *model.SiZhuModel) []*DiZhiCanGanData {
-	ret := make([]*DiZhiCanGanData, 0)
+func (r *DiZhiCangGanGet) Get(z *SiZhuModel) []*DiZhiCangGanData {
+	ret := make([]*DiZhiCangGanData, 0)
 	//--------nianZhi -----------------------------
 	for _, zhu := range z.ZhiList() {
 		if l := r.GetSingle(zhu); len(l) > 0 {
-			ret = append(ret, &DiZhiCanGanData{
-				Name:    zhu,
-				GanList: l,
-			})
+			//
+			ll := r.getShiShen(z.RiGan, l...)
+			if len(ll) > 0 {
+				ret = append(ret, &DiZhiCangGanData{
+					Name:    zhu,
+					GanList: ll,
+				})
+			}
 		}
 	}
 	return ret
 }
 
-func (r *DiZhiCanGanGet) GetSingle(zhi string) (lstTanGan []string) {
+func (r *DiZhiCangGanGet) getShiShen(myGan string, lZhi ...string) []*KVRoot {
+	ret := make([]*KVRoot, 0)
+	for _, zhi := range lZhi {
+		shen := cmn.GetShiShen(myGan, zhi)
+		//
+		ret = append(ret, &KVRoot{
+			Name:    zhi,
+			Comment: shen,
+		})
+	}
+	return ret
+}
+
+func (r *DiZhiCangGanGet) GetSingle(zhi string) (lstTanGan []string) {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{

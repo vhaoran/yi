@@ -45,6 +45,11 @@ func Test_b(t *testing.T) {
 	fmt.Println(d.GetBaZi())
 }
 
-func Test_GetYearGanZi(t *testing.T) {
-
+func Test_gong12(t *testing.T) {
+	for _, gan := range Gan_list {
+		for _, zhi := range Zhi_list {
+			i, str := GetGong12OfGan(gan, zhi)
+			fmt.Println(gan, "-", zhi, "(", i, " ", str, ")")
+		}
+	}
 }

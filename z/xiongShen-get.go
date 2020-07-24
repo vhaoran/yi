@@ -18,22 +18,22 @@ import (
 type (
 	XiongShenGet struct {
 	}
-	XiongShenData struct {
+	XiongShenItem struct {
 		KVRoot
 	}
 )
 
-func (r *XiongShenGet) Call(z *SiZhuModel) []*XiongShenData {
+func (r *XiongShenGet) Call(z *SiZhuModel) []*XiongShenItem {
 	//-------- -----------------------------
-	ret := make([]*XiongShenData, 0)
+	ret := make([]*XiongShenItem, 0)
 	if l := r.YanRen(z.RiGan, z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
 		ret = append(ret, l...)
 	}
 	//-------- -----------------------------
-	if l := r.LieJiaKongWang(z.RiGan+z.RiZhi, z.NianZhi, z.YueZhi, z.ShiZhi); len(l) > 0 {
+	if l := r.LiuJiaKongWang(z.RiGan+z.RiZhi, z.NianZhi, z.YueZhi, z.ShiZhi); len(l) > 0 {
 		ret = append(ret, l...)
 	}
-	if l := r.LieJiaKongWang(z.NianGan+z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
+	if l := r.LiuJiaKongWang(z.NianGan+z.NianZhi, z.YueZhi, z.RiZhi, z.ShiZhi); len(l) > 0 {
 		ret = append(ret, l...)
 	}
 	//-------- -----------------------------
@@ -59,11 +59,11 @@ func (r *XiongShenGet) Call(z *SiZhuModel) []*XiongShenData {
 	}
 	//-------- -----------------------------
 
-	return nil
+	return ret
 }
 
 //羊刃
-func (r *XiongShenGet) YanRen(riGan string, lZhi ...string) []*XiongShenData {
+func (r *XiongShenGet) YanRen(riGan string, lZhi ...string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -82,7 +82,7 @@ func (r *XiongShenGet) YanRen(riGan string, lZhi ...string) []*XiongShenData {
 }
 
 //六甲空亡
-func (r *XiongShenGet) LieJiaKongWang(nianOrRiGanZhi string, otherZhi ...string) []*XiongShenData {
+func (r *XiongShenGet) LiuJiaKongWang(nianOrRiGanZhi string, otherZhi ...string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -97,7 +97,7 @@ func (r *XiongShenGet) LieJiaKongWang(nianOrRiGanZhi string, otherZhi ...string)
 }
 
 //桃花
-func (r *XiongShenGet) TaoHua(nianOrRiZhi string, otherZhi ...string) []*XiongShenData {
+func (r *XiongShenGet) TaoHua(nianOrRiZhi string, otherZhi ...string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -121,16 +121,16 @@ func (r *XiongShenGet) TaoHua(nianOrRiZhi string, otherZhi ...string) []*XiongSh
 }
 
 //阴阳差错
-func (r *XiongShenGet) YinYangChaCuo(nianOrRiGanZhi string) []*XiongShenData {
+func (r *XiongShenGet) YinYangChaCuo(nianOrRiGanZhi string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	l := []string{"丙子", "丁丑", "戊寅", "辛卯",
 		"壬辰", "癸巳", "丙午", "丁未",
 		"戊申", "辛酉", "壬戌", "癸亥"}
 
-	ret := make([]*XiongShenData, 0)
+	ret := make([]*XiongShenItem, 0)
 	if g.InSlice(nianOrRiGanZhi, l) {
-		ret = append(ret, &XiongShenData{
+		ret = append(ret, &XiongShenItem{
 			KVRoot: KVRoot{
 				Name:    "阴阳差错",
 				Comment: nianOrRiGanZhi,
@@ -141,7 +141,7 @@ func (r *XiongShenGet) YinYangChaCuo(nianOrRiGanZhi string) []*XiongShenData {
 }
 
 //天罗地网
-func (r *XiongShenGet) TianLuoDiWang(nianOrRiZhi string, otherZhi ...string) []*XiongShenData {
+func (r *XiongShenGet) TianLuoDiWang(nianOrRiZhi string, otherZhi ...string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -154,7 +154,7 @@ func (r *XiongShenGet) TianLuoDiWang(nianOrRiZhi string, otherZhi ...string) []*
 }
 
 //动煞
-func (r *XiongShenGet) JieSha(nianOrRiZhi string, otherZhi ...string) []*XiongShenData {
+func (r *XiongShenGet) JieSha(nianOrRiZhi string, otherZhi ...string) []*XiongShenItem {
 	//子丑寅卯辰巳午未申酉戌亥
 	//甲乙丙丁戊己庚辛壬癸
 	m := cmn.KV{
@@ -177,16 +177,16 @@ func (r *XiongShenGet) JieSha(nianOrRiZhi string, otherZhi ...string) []*XiongSh
 	return r.match(m, "动煞", nianOrRiZhi, otherZhi...)
 }
 
-func (r *XiongShenGet) match(m cmn.KV, title, key string, l ...string) []*XiongShenData {
+func (r *XiongShenGet) match(m cmn.KV, title, key string, l ...string) []*XiongShenItem {
 	s, ok := m[key]
 	if !ok {
 		return nil
 	}
 
-	ret := make([]*XiongShenData, 0)
+	ret := make([]*XiongShenItem, 0)
 	for _, sub := range l {
 		if strings.Contains(s, sub) {
-			ret = append(ret, &XiongShenData{
+			ret = append(ret, &XiongShenItem{
 				KVRoot: KVRoot{
 					Name:    title,
 					Comment: key + s,

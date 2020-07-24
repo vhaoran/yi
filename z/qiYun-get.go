@@ -20,7 +20,7 @@ type (
 
 //起动的年、月数
 func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
-	asc := r.isAsc(z)
+	asc := r.IsAsc(z)
 	//
 	//得到第月标记性的12个节
 	jie := service.GetJie(z.Nian)
@@ -95,8 +95,8 @@ func (r *QiYunGet) locateYue(l []*service.JieData, t time.Time) (month int) {
 	return -1
 }
 
-//是：阳男或阴女--
-func (r *QiYunGet) isAsc(z *model.SiZhuModel) bool {
+//是：大运要顺排,阳男或阴女--,
+func (r *QiYunGet) IsAsc(z *model.SiZhuModel) bool {
 	gan := z.NianGan
 	//甲乙丙丁戊己庚辛壬癸
 	//"子丑寅卯辰巳午未申酉戌亥"}

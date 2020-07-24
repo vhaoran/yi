@@ -87,4 +87,17 @@ func Test_bz_get(t *testing.T) {
 		fmt.Println(v.ToString())
 	}
 
+	//--------dayun -----------------------------
+	fmt.Println("--------起大运---------")
+	qiYunSuiShe := nianShu
+	if yueShu > 6 {
+		qiYunSuiShe += 1
+	}
+
+	l_PaiDaYunExec := new(PaiDaYunExec).Exec(z, qiYunSuiShe)
+	for _, v := range l_PaiDaYunExec {
+		fmt.Println(v.ToString())
+	}
+
+	//-------- -----------------------------
 }

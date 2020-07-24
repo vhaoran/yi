@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-/*  天十地支的阴阳属笥  */
+/*  天十地支的阴阳属性  */
 type ShuXing int
 
 const (
