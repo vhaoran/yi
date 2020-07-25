@@ -43,7 +43,7 @@ func (r *DaYunInfo) Zhu() string {
 }
 
 func (r *DaYunInfo) ToString() string {
-	s := r.Zhu() + "(" + r.Gong12 + ")"
+	s := "-------- " + r.Zhu() + "(" + r.Gong12 + ") ---------"
 	s1 := fmt.Sprint("(", r.NianStart, "-", r.NianEnd, ")")
 	s3 := "吉神:"
 	for _, v := range r.JiShen {

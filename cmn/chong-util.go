@@ -2,52 +2,47 @@ package cmn
 
 import (
 	"strings"
+
+	"github.com/vhaoran/vchat/common/g"
 )
 
 func GanChong(gan1, gan2 string) bool {
+	s1 := gan1 + gan2
+	s2 := gan2 + gan2
+
 	//甲庚相冲、乙辛相冲、壬丙相冲、癸丁相冲
 	l := []string{"甲庚", "乙辛", "壬丙", "癸丁"}
 
-	for _, v := range l {
-		if strings.Contains(v, gan1) &&
-			strings.Contains(v, gan1) {
-			return true
-		}
-	}
-
-	return false
+	return g.InSlice(s1, l) || g.InSlice(s2, l)
 }
 
 func ZhiChong(zhi1, zhi2 string) bool {
+	s1, s2 := zhi1+zhi2, zhi2+zhi1
+
 	////
 	l := []string{"子午", "卯酉", "辰戌", "丑未", "寅申", "巳亥"}
 
-	for _, v := range l {
-		if strings.Contains(v, zhi1) &&
-			strings.Contains(v, zhi2) {
-			return true
-		}
-	}
-
-	return false
+	return g.InSlice(s1, l) || g.InSlice(s2, l)
 }
 
-func FanYinSlice(ganZhi string, lGan ...string) bool {
-	for _, v := range lGan {
+func FanYinSlice(ganZhi string, lGanZhi ...string) (fanYin bool, fanYinganZhi string) {
+	for _, v := range lGanZhi {
 		if FanYin(ganZhi, v) {
-			return true
+			fanYin, fanYinganZhi = true, v
+			return
 		}
 	}
-	return false
+	return false, ""
 }
 
-func FuYinSlice(ganZhi string, lGanZhi ...string) bool {
+func FuYinSlice(ganZhi string, lGanZhi ...string) (fuYin bool, fuYinGanZhi string) {
 	for _, v := range lGanZhi {
 		if FuYin(ganZhi, v) {
-			return true
+			fuYin, fuYinGanZhi = true, v
+			return
 		}
 	}
-	return false
+	return false, ""
 }
 
 func FanYin(ganZhi1, ganZhi2 string) bool {

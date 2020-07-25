@@ -34,10 +34,10 @@ func (r *DaYunItem) ToString() string {
 			l = v.ToString()
 			continue
 		}
-		l += "," + v.ToString()
+		l += ",\n\r" + v.ToString()
 	}
 
-	s := fmt.Sprintf("%s \n\r   %s \n\n  %s \n\n ",
+	s := fmt.Sprintf("%s \n\r   %s \n\r  %s \n\r ",
 		r.DaYu.ToString(),
 		l,
 		strings.Join(r.AnalyzeInfo, "\n\r"))

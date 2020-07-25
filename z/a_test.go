@@ -10,6 +10,20 @@ import (
 	"github.com/vhaoran/yi/service"
 )
 
+func Test_fuyin(t *testing.T) {
+	//子丑寅卯辰巳午未申酉戌亥
+	//甲乙丙丁戊己庚辛壬癸
+
+	a, str := cmn.FuYinSlice("庚寅", "庚戌", "戊子", "戊辰", "甲寅")
+	fmt.Println(a, "---", str)
+}
+
+func Test_zhiChong(t *testing.T) {
+	b := cmn.ZhiChong("寅", "寅")
+	fmt.Println("-----------------")
+	fmt.Println(b)
+}
+
 func Test_get_na_yin(t *testing.T) {
 	for y := 1970; y <= 2030; y++ {
 		//d := calendar.NewSolarFromYmd(y,5,1)
@@ -98,6 +112,8 @@ func Test_bz_get(t *testing.T) {
 	l_PaiDaYunExec := new(PaiDaYunItemExec).Exec(z)
 	for _, v := range l_PaiDaYunExec {
 		fmt.Println(v.ToString())
+		fmt.Println("-----------------")
+		//spew.Dump(v)
 	}
 
 	//-------- -----------------------------

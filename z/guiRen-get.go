@@ -175,7 +175,7 @@ func (r *GuiRenGet) TianYi(nianOrRiGan string, lZhi ...string) []*GuiRenItem {
 		"壬": "卯巳",
 		"癸": "卯巳",
 	}
-	return r.match(m, "天乙貴人", nianOrRiGan, lZhi...)
+	return r.match(m, "天乙贵人", nianOrRiGan, lZhi...)
 }
 
 //十干禄
