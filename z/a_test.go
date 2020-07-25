@@ -94,7 +94,8 @@ func Test_bz_get(t *testing.T) {
 		qiYunSuiShe += 1
 	}
 
-	l_PaiDaYunExec := new(PaiDaYunExec).Exec(z, qiYunSuiShe)
+	z.IsMale = true
+	l_PaiDaYunExec := new(PaiDaYunItemExec).Exec(z)
 	for _, v := range l_PaiDaYunExec {
 		fmt.Println(v.ToString())
 	}

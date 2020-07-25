@@ -37,6 +37,10 @@ func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
 		if yueOfJie == 12 {
 			data := jie[len(jie)-1]
 			offset := int(z.Solar().Sub(data.Date).Hours() / 24)
+			if offset < 0 {
+				offset = -offset
+			}
+
 			//腊月共30天
 			nianShu = (30 - offset + 1) / 3
 			yueShu = (30 - offset + 1) % 3
@@ -61,6 +65,10 @@ func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
 	if yueOfJie == -1 {
 		data := jie[0]
 		offset := int(z.Solar().Sub(data.Date).Hours() / 24)
+		if offset < 0 {
+			offset = -offset
+		}
+
 		//腊月共30天
 		nianShu = (offset + 1) / 3
 		yueShu = (offset + 1) % 3 * 4
@@ -70,6 +78,10 @@ func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
 	//如：1月，取索引为2的节
 	data = jie[yueOfJie-1]
 	offset := int(data.Date.Sub(z.Solar()).Hours() / 24)
+	if offset < 0 {
+		offset = -offset
+	}
+
 	//腊月共30天
 	nianShu = (offset + 1) / 3
 	yueShu = (offset + 1) % 3 * 4
@@ -101,8 +113,8 @@ func (r *QiYunGet) IsAsc(z *model.SiZhuModel) bool {
 	//甲乙丙丁戊己庚辛壬癸
 	//"子丑寅卯辰巳午未申酉戌亥"}
 	//子寅辰午申戌
-	const yanGan = "子寅辰午申戌"
-	isYanGan := strings.Contains(yanGan, gan)
+	const yangGan = "甲丙戊庚壬"
+	isYanGan := strings.Contains(yangGan, gan)
 	//阳男 或阴女 反加真
 	return (isYanGan && z.IsMale) || (!isYanGan && !z.IsMale)
 }

@@ -13,27 +13,57 @@ type (
 
 	LiuNianItem struct {
 		Nian int
-		Gan  string
-		Zhi  string
+
+		Gan string
+		Zhi string
 
 		//
 		JiShen    []*GuiRenItem
 		XiongShen []*XiongShenItem
-		FaYin     bool
+		FamYin    bool
 		FuYin     bool
+		//運上的流年解析
+		AnalyzeInfo []string
 	}
 )
 
 func (r *LiuNianItem) ToString() string {
 	str := fmt.Sprint(r.Zhu(), "(", r.Nian, ")")
-	return str
+
+	s3 := "吉神:"
+	for _, v := range r.JiShen {
+		if s3 == "吉神:" {
+			s3 = v.ToString()
+			continue
+		}
+		s3 += "," + v.ToString()
+	}
+
+	//-------- -----------------------------
+	s4 := "凶神:"
+	for _, v := range r.JiShen {
+		if s4 == "凶神:" {
+			s4 = v.ToString()
+			continue
+		}
+		s4 += "," + v.ToString()
+	}
+	s5 := " 特另注意:： "
+	if r.FamYin {
+		s5 = "/反吟"
+	}
+	if r.FuYin {
+		s5 += "/伏吟"
+	}
+
+	return str + s3 + s4 + s5
 }
 
 func (r *LiuNianItem) Zhu() string {
 	return r.Gan + r.Zhi
 }
 
-func (r *PaiLiuNianExec) Exec(nian int, z SiZhuModel, yun *DaYuItem) *LiuNianItem {
+func (r *PaiLiuNianExec) Exec(nian int, z *SiZhuModel, yun *DaYunInfo) *LiuNianItem {
 	gan, zhi := cmn.GetNianGanZhi(nian)
 
 	bean := &LiuNianItem{
@@ -43,30 +73,30 @@ func (r *PaiLiuNianExec) Exec(nian int, z SiZhuModel, yun *DaYuItem) *LiuNianIte
 		JiShen:    nil,
 		XiongShen: nil,
 
-		FaYin: false,
-		FuYin: false,
+		FamYin: false,
+		FuYin:  false,
 	}
 	//
 	r.setJiSheng(bean, z, yun)
 	r.setXiongShen(bean, z, yun)
-	bean.FaYin = cmn.FanYinSlice(bean.Zhu(), z.ZhuList()...)
+	bean.FamYin = cmn.FanYinSlice(bean.Zhu(), z.ZhuList()...)
 	bean.FuYin = cmn.FuYinSlice(bean.Zhu(), z.ZhuList()...)
 	//
 
 	return bean
 }
 
-func (r *PaiLiuNianExec) setJiSheng(bean *LiuNianItem, z SiZhuModel, yun *DaYuItem) {
+func (r *PaiLiuNianExec) setJiSheng(bean *LiuNianItem, z *SiZhuModel, yun *DaYunInfo) {
 	lGuiRen := r.getGuiRen(z, yun, bean)
 	bean.JiShen = lGuiRen
 }
 
-func (r *PaiLiuNianExec) setXiongShen(bean *LiuNianItem, z SiZhuModel, yun *DaYuItem) {
+func (r *PaiLiuNianExec) setXiongShen(bean *LiuNianItem, z *SiZhuModel, yun *DaYunInfo) {
 	l := r.getXiongShen(z, yun, bean)
 	bean.XiongShen = l
 }
 
-func (r *PaiLiuNianExec) getGuiRen(z SiZhuModel, yun *DaYuItem, n *LiuNianItem) []*GuiRenItem {
+func (r *PaiLiuNianExec) getGuiRen(z *SiZhuModel, yun *DaYunInfo, n *LiuNianItem) []*GuiRenItem {
 	ret := make([]*GuiRenItem, 0)
 
 	obj := new(GuiRenGet)
@@ -144,7 +174,7 @@ func (r *PaiLiuNianExec) getGuiRen(z SiZhuModel, yun *DaYuItem, n *LiuNianItem) 
 	return ret
 }
 
-func (r *PaiLiuNianExec) getXiongShen(z SiZhuModel, yun *DaYuItem, n *LiuNianItem) []*XiongShenItem {
+func (r *PaiLiuNianExec) getXiongShen(z *SiZhuModel, yun *DaYunInfo, n *LiuNianItem) []*XiongShenItem {
 	obj := new(XiongShenGet)
 	//-------- -----------------------------
 	ret := make([]*XiongShenItem, 0)
