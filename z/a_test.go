@@ -112,7 +112,7 @@ func Test_bz_get(t *testing.T) {
 	l_PaiDaYunExec := new(PaiDaYunItemExec).Exec(z)
 	for _, v := range l_PaiDaYunExec {
 		fmt.Println(v.ToString())
-		fmt.Println("-----------------")
+		//fmt.Println("-----------------")
 		//spew.Dump(v)
 	}
 

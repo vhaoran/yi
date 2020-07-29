@@ -3,8 +3,6 @@ package z
 import (
 	"fmt"
 
-	"github.com/davecgh/go-spew/spew"
-
 	"github.com/vhaoran/yi/cmn"
 	. "github.com/vhaoran/yi/z/model"
 )
@@ -92,7 +90,7 @@ func (r *PaiLiuNianExec) Exec(nian int, z *SiZhuModel, yun *DaYunInfo) *LiuNianI
 		FuYin:  false,
 	}
 	//
-	r.setJiSheng(bean, z, yun)
+	r.setJiShen(bean, z, yun)
 	r.setXiongShen(bean, z, yun)
 	bean.FanYin, bean.FanYinGanZhi = cmn.FanYinSlice(bean.Zhu(), z.ZhuList()...)
 	bean.FuYin, bean.FuYinGanZhi = cmn.FuYinSlice(bean.Zhu(), z.ZhuList()...)
@@ -101,17 +99,43 @@ func (r *PaiLiuNianExec) Exec(nian int, z *SiZhuModel, yun *DaYunInfo) *LiuNianI
 	return bean
 }
 
-func (r *PaiLiuNianExec) setJiSheng(bean *LiuNianItem, z *SiZhuModel, yun *DaYunInfo) {
-	lGuiRen := r.getGuiRen(z, yun, bean)
-	spew.Dump(lGuiRen)
+func (r *PaiLiuNianExec) excludeJiShen(src []*GuiRenItem, exclude []*GuiRenItem) []*GuiRenItem {
+	l := make([]*GuiRenItem, 0)
+	//
+	for _, v := range src {
+		found := false
+		for _, vv := range exclude {
+			if v.ToString() == vv.ToString() {
+				found = true
+				break
+			}
+		}
+		if !found {
+			l = append(l, v)
+		}
+	}
+	return l
+}
 
-	bean.JiShen = lGuiRen
+func (r *PaiLiuNianExec) setJiShen(bean *LiuNianItem, z *SiZhuModel, yun *DaYunInfo) {
+	l := r.getGuiRen(z, yun, bean)
+	exclude := new(GuiRenGet).Call(z)
+	//
+	lg := r.excludeJiShen(l, exclude)
+	//----------------------------------------
+
+	//spew.Dump(lg)
+	bean.JiShen = lg
 }
 
 func (r *PaiLiuNianExec) setXiongShen(bean *LiuNianItem, z *SiZhuModel, yun *DaYunInfo) {
 	l := r.getXiongShen(z, yun, bean)
-	fmt.Println("-----------------")
-	bean.XiongShen = l
+	//fmt.Println("-----------------")
+	exclude := new(XiongShenGet).Call(z)
+
+	lx := r.excludeXiongShe(l, exclude)
+
+	bean.XiongShen = lx
 }
 
 func (r *PaiLiuNianExec) uniqueJiShen(l ...*GuiRenItem) []*GuiRenItem {
@@ -258,4 +282,22 @@ func (r *PaiLiuNianExec) getXiongShen(z *SiZhuModel, yun *DaYunInfo, n *LiuNianI
 	//-------- -----------------------------
 
 	return r.uniqueXiongShen(ret...)
+}
+
+func (r *PaiLiuNianExec) excludeXiongShe(src []*XiongShenItem, exclude []*XiongShenItem) []*XiongShenItem {
+	l := make([]*XiongShenItem, 0)
+	//
+	for _, v := range src {
+		found := false
+		for _, vv := range exclude {
+			if v.ToString() == vv.ToString() {
+				found = true
+				break
+			}
+		}
+		if !found {
+			l = append(l, v)
+		}
+	}
+	return l
 }

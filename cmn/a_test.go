@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/6tail/lunar-go/calendar"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/vhaoran/vchat/common/ytime"
 )
 
@@ -23,11 +22,11 @@ func Test_a(t *testing.T) {
 	fmt.Println(lunar.GetJieQiTable())
 	fmt.Println("-----------------")
 	for k, v := range lunar.GetJieQiTable() {
-		fmt.Println("-----------------")
+		//fmt.Println("-----------------")
 		s := fmt.Sprintf("%d-%d-%d -%d-%d-%d", v.GetYear(), v.GetMonth(),
 			v.GetDay(), v.GetHour(), v.GetMinute(), v.GetSecond())
 		fmt.Println(k, " : ", s)
-		spew.Dump(v)
+		// spew.Dump(v)
 	}
 
 }
