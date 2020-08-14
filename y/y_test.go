@@ -41,7 +41,8 @@ func Test_BianGua(t *testing.T) {
 		code := fmt.Sprintf("%06b", i)
 		g := GetG64(code)
 
-		codeB := fmt.Sprintf("%06b", 64-i-1)
+		//codeB := fmt.Sprintf("%06b", 64-i-1)
+		codeB := "111010"
 		b := GetG64(codeB)
 
 		lb := g.TranLiuqinOfBiangua(b.L)

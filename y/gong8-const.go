@@ -25,7 +25,7 @@ var GONG8_8ChunGuaCode = map[string]string{
 
 var GONG8_WUXING = map[string]string{
 	"乾": "金",
-	"兑": "水",
+	"兑": "金",
 	"离": "火",
 	"震": "木",
 	"巽": "木",
