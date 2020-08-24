@@ -50,8 +50,31 @@ func (r *BaZiGet) FromSolar(Y, M, D, H, minutes int) *SiZhuModel {
 	return nil
 }
 
-func (r *BaZiGet) FromLunar() {
+func (r *BaZiGet) FromLunar(nian, yue, ri, shi, fen int) *SiZhuModel {
 
+	//
+	var d = calendar.NewLunarFromYmd(nian, yue, ri)
+	var solar = d.GetSolar()
+
+	lunar := calendar.NewLunar(nian, yue, ri, shi, fen, 0)
+
+	z := &SiZhuModel{
+		YYYY:   solar.GetYear(),
+		MM:     solar.GetMonth(),
+		DD:     solar.GetDay(),
+		HH:     solar.GetHour(),
+		Minute: fen,
+
+		Nian: lunar.GetYear(),
+		Yue:  lunar.GetMonth(),
+		Ri:   lunar.GetDay(),
+		Shi:  "",
+	}
+	if r.tran(z) {
+		return z
+	}
+
+	return nil
 }
 
 func (r *BaZiGet) tran(z *SiZhuModel) bool {

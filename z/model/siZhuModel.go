@@ -9,29 +9,30 @@ import (
 type (
 	SiZhuModel struct {
 		//男性
-		IsMale bool
+		IsMale bool `json:"is_male"`
 		//solar
-		YYYY   int
-		MM     int
-		DD     int
-		HH     int
-		Minute int
+		YYYY   int `json:"year"`
+		MM     int `json:"month"`
+		DD     int `json:"day"`
+		HH     int `json:"hour"`
+		Minute int `json:"minute"`
 
 		//lunar
-		Nian int
-		Yue  int
-		Ri   int
-		Shi  string
+		Nian int    `json:"nian"`
+		Yue  int    `json:"yue"`
+		Ri   int    `json:"ri"`
+		Shi  string `json:"shi"`
 
 		//gan/zhi
-		NianGan string
-		NianZhi string
-		YueGan  string
-		YueZhi  string
-		RiGan   string
-		RiZhi   string
-		ShiGan  string
-		ShiZhi  string
+		NianGan string `json:"nian_gan"`
+		NianZhi string `json:"nian_zhi"`
+		YueGan  string `json:"yue_gan"`
+
+		YueZhi string `json:"yue_zhi"`
+		RiGan  string `json:"ri_gan"`
+		RiZhi  string `json:"ri_zhi"`
+		ShiGan string `json:"shi_gan"`
+		ShiZhi string `json:"shi_zhi"`
 	}
 )
 

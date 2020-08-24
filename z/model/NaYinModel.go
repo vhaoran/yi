@@ -2,11 +2,9 @@ package model
 
 type (
 	NaYinModel struct {
-		Nian string
-		Yue  string
-		Ri   string
-		Shi  string
+		Nian string `json:"nian"`
+		Yue  string `json:"yue"`
+		Ri   string `json:"ri"`
+		Shi  string `json:"shi"`
 	}
 )
-
-

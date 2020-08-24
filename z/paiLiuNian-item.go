@@ -12,21 +12,21 @@ type (
 	}
 
 	LiuNianItem struct {
-		Nian int
+		Nian int `json:"nian"`
 
-		Gan string
-		Zhi string
+		Gan string `json:"gan"`
+		Zhi string `json:"zhi"`
 
 		//
-		JiShen       []*GuiRenItem
-		XiongShen    []*XiongShenItem
-		FanYin       bool
-		FanYinGanZhi string
+		JiShen       []*GuiRenItem    `json:"ji_shen"`
+		XiongShen    []*XiongShenItem `json:"xiong_shen"`
+		FanYin       bool             `json:"fan_yin"`
+		FanYinGanZhi string           `json:"fanyin_ganzhi"`
 
-		FuYin       bool
-		FuYinGanZhi string
+		FuYin       bool   `json:"fuyin"`
+		FuYinGanZhi string `json:"fuyin_ganzhi"`
 		//運上的流年解析
-		AnalyzeInfo []string
+		AnalyzeInfo []string `json:"analyze_info"`
 	}
 )
 

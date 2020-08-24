@@ -18,11 +18,11 @@ type (
 
 	DaYunItem struct {
 		//大运基本分析信彷
-		DaYu *DaYunInfo
+		DaYu *DaYunInfo `json:"da_yun"`
 		//对应大运中的10个汉年
-		LiuNian []*LiuNianItem
+		LiuNian []*LiuNianItem `json:"liu_nian"`
 		//大運解析
-		AnalyzeInfo []string
+		AnalyzeInfo []string `json:"analyze_info"`
 	}
 )
 

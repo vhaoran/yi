@@ -14,27 +14,27 @@ type (
 	//主要用于显示
 	DaYunInfo struct {
 		//大支干支
-		Gan string
-		Zhi string
+		Gan string `json:"gan"`
+		Zhi string `json:"zhi"`
 
 		//大运名称
-		Gong12 string
+		Gong12 string `json:"gong12"`
 		//大运简称
-		Gong12Short string
+		Gong12Short string `json:"gong12_short"`
 
 		//该运开始时年龄
-		YearsOld int
+		YearsOld int `json:"years_old"`
 
 		//开始年
-		NianStart int
+		NianStart int `json:"nian_start"`
 		//结束年
-		NianEnd int
+		NianEnd int `json:"nian_end"`
 
 		//
-		JiShen    []*GuiRenItem
-		XiongShen []*XiongShenItem
-		FamYin    bool
-		FuYin     bool
+		JiShen    []*GuiRenItem    `json:"ji_shen"`
+		XiongShen []*XiongShenItem `json:"xiong_shen"`
+		FanYin    bool             `json:"fan_yin"`
+		FuYin     bool             `json:"fu_yin"`
 	}
 )
 
@@ -66,7 +66,7 @@ func (r *DaYunInfo) ToString() string {
 
 	//-------- -----------------------------
 	s5 := " 特另注意:： "
-	if r.FamYin {
+	if r.FanYin {
 		s5 = "/反吟"
 	}
 	if r.FuYin {

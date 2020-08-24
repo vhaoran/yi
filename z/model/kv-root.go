@@ -6,8 +6,8 @@ import (
 
 type (
 	KVRoot struct {
-		Name    string
-		Comment string
+		Name    string `json:"name"`
+		Comment string `json:"comment"`
 	}
 )
 
