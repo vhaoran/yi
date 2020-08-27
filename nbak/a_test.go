@@ -80,7 +80,7 @@ func Test_GetDateByLunar(t *testing.T) {
 }
 
 func Test_ToSolar(t *testing.T) {
-	y, m, d := new(ToSolar).GetSolarDate(2020, 7, 16)
+	y, m, d := new(ToSolar).GetSolarDate(1996, 7, 21)
 	fmt.Println("-----------------")
 	fmt.Println("------->---", y, " ", m, " ", d)
 

@@ -10,7 +10,7 @@ import (
 
 //solar
 func Test_a(t *testing.T) {
-	y, m, d := 2020, 2, 3
+	y, m, d := 1996,7, 21
 	dt := ytime.OfInt(y, m, d).Time
 	lunar := calendar.NewLunarFromDate(dt)
 	fmt.Println(lunar.ToFullString())
