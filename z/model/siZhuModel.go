@@ -9,30 +9,30 @@ import (
 type (
 	SiZhuModel struct {
 		//男性
-		IsMale bool `json:"is_male"`
+		IsMale bool `json:"is_male"   bson:"is_male"`
 		//solar
-		YYYY   int `json:"year"`
-		MM     int `json:"month"`
-		DD     int `json:"day"`
-		HH     int `json:"hour"`
-		Minute int `json:"minute"`
+		YYYY   int `json:"year"   bson:"yyyy"`
+		MM     int `json:"month"   bson:"mm"`
+		DD     int `json:"day"   bson:"dd"`
+		HH     int `json:"hour"   bson:"hh"`
+		Minute int `json:"minute"   bson:"minute"`
 
 		//lunar
-		Nian int    `json:"nian"`
-		Yue  int    `json:"yue"`
-		Ri   int    `json:"ri"`
-		Shi  string `json:"shi"`
+		Nian int    `json:"nian"   bson:"nian"`
+		Yue  int    `json:"yue"   bson:"yue"`
+		Ri   int    `json:"ri"   bson:"ri"`
+		Shi  string `json:"shi"   bson:"shi"`
 
 		//gan/zhi
-		NianGan string `json:"nian_gan"`
-		NianZhi string `json:"nian_zhi"`
-		YueGan  string `json:"yue_gan"`
+		NianGan string `json:"nian_gan"   bson:"nian_gan"`
+		NianZhi string `json:"nian_zhi"   bson:"nian_zhi"`
+		YueGan  string `json:"yue_gan"   bson:"yue_gan"`
 
-		YueZhi string `json:"yue_zhi"`
-		RiGan  string `json:"ri_gan"`
-		RiZhi  string `json:"ri_zhi"`
-		ShiGan string `json:"shi_gan"`
-		ShiZhi string `json:"shi_zhi"`
+		YueZhi string `json:"yue_zhi"   bson:"yue_zhi"`
+		RiGan  string `json:"ri_gan"   bson:"ri_gan"`
+		RiZhi  string `json:"ri_zhi"   bson:"ri_zhi"`
+		ShiGan string `json:"shi_gan"   bson:"shi_gan"`
+		ShiZhi string `json:"shi_zhi"   bson:"shi_zhi"`
 	}
 )
 
