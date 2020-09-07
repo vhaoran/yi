@@ -35,15 +35,20 @@ func Test_get_na_yin(t *testing.T) {
 }
 
 func Test_bz_get(t *testing.T) {
-	y, m, d, h, minute := 1970, 12, 14, 4, 50
+	y, m, d, h, minute := 1992, 5, 6, 7, 50
 	z := BaZiGetX.FromSolar(y, m, d, h, minute)
 	//
 	fmt.Println("-----------------")
 
 	spew.Dump(z)
-	fmt.Println("-----------------")
+	fmt.Println("-----------------",
+		z.NianZhu(), " ",
+		z.YueZhu(), " ",
+		z.RiZhu(), " ",
+		z.ShiZhu(), " ",
+	)
 
-	l := service.GetJie(1970)
+	l := service.GetJie(y)
 	for i, v := range l {
 		fmt.Println(i+1, " --- ", v.ToString())
 	}
