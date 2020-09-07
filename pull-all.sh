@@ -15,11 +15,15 @@ fn(){
 
 fn   "$GOPATH/src/yi/";
 fn   "$GOPATH/src/yiintf/";
+
 fn   "$GOPATH/src/yigw/";
+
 fn   "$GOPATH/src/yiuser/";
 fn   "$GOPATH/src/yicms/";
 fn   "$GOPATH/src/yitrade/";
 fn   "$GOPATH/src/yimsg/";
+fn   "$GOPATH/src/yiutil/";
+
 
 
 echo "------complete------------------"
