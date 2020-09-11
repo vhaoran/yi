@@ -26,13 +26,14 @@ func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
 	jie := service.GetJie(z.Nian)
 
 	//得到节 意义上的月
-	//-1时表示在上一年
+	// -1时 表示在上一年的丑月
+	// 此徙的月只有索引的意义
 	yueOfJie := r.locateYue(jie, z.Solar())
 
 	var data *service.JieData
 	//顺排
 	if asc {
-		data := jie[z.Yue]
+		var data *service.JieData
 		//12月向前数日期，再用30减
 		if yueOfJie == 12 {
 			data := jie[len(jie)-1]
@@ -50,7 +51,7 @@ func (r *QiYunGet) Call(z *model.SiZhuModel) (nianShu, yueShu int) {
 		if yueOfJie == -1 {
 			data = jie[0]
 		} else { //如：1月，取索引为2的节
-			data = jie[z.Yue]
+			data = jie[yueOfJie]
 		}
 
 		offset := int(data.Date.Sub(z.Solar()).Hours() / 24)
@@ -99,11 +100,12 @@ func (r *QiYunGet) locateYue(l []*service.JieData, t time.Time) (month int) {
 	}
 
 	//------if not found------------
+	//大于最后的日期，说明落在了12月份
 	if t.After(l[len(l)-1].Date) {
 		return 12
 	}
 
-	//
+	//有在这个范围之内，说明是上一年的日期，按上一年算
 	return -1
 }
 

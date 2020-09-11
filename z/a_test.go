@@ -35,8 +35,9 @@ func Test_get_na_yin(t *testing.T) {
 }
 
 func Test_bz_get(t *testing.T) {
-	y, m, d, h, minute := 1992, 5, 6, 7, 50
-	z := BaZiGetX.FromSolar(y, m, d, h, minute)
+	y, m, d, h, minute := 1998, 7, 20, 23, 23
+	//z := BaZiGetX.FromSolar(y, m, d, h, minute)
+	z := BaZiGetX.FromLunar(y, m, d, h, minute)
 	//
 	fmt.Println("-----------------")
 
