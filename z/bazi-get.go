@@ -160,7 +160,7 @@ func (r *BaZiGet) SetRiGanZhi(z *SiZhuModel) {
 	//如里时间>=23点，取下一日
 	if z.HH >= 23 {
 		//取後一日
-		next := z.Solar().Add(time.Hour * 24 * (-1))
+		next := z.Solar().Add(time.Hour * 24)
 		z.RiGan, z.RiZhi = cmn.GetRiGanZhi(next.Year(), int(next.Month()), next.Day())
 		return
 	}
