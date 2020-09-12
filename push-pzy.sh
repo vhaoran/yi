@@ -20,9 +20,9 @@ up   "$WORK/yigw/";
 
 up   "$WORK/yiuser/";
 up   "$WORK/yicms/";
-up   "$WORK/yitrade/";
-up   "$WORK/yimsg/";
-up   "$WORK/yiutil/";
+# up   "$WORK/yitrade/";
+# up   "$WORK/yimsg/";
+# up   "$WORK/yiutil/";
 
 
 
