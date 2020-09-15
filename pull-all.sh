@@ -7,6 +7,7 @@ fn(){
    cd $DIR
    git pull origin master
 
+   echo "-------->-""$DIR""-->>>--"
 };
 
 
