@@ -41,7 +41,7 @@ func (r *BaZiGet) FromSolar(Y, M, D, H, minutes int) *SiZhuModel {
 		Nian:   lunar.GetYear(),
 		Yue:    lunar.GetMonth(),
 		Ri:     lunar.GetDay(),
-		Shi:    "",
+		Shi:    fmt.Sprint(H, ":", minutes),
 	}
 	if r.tran(z) {
 		return z
@@ -68,7 +68,7 @@ func (r *BaZiGet) FromLunar(nian, yue, ri, shi, fen int) *SiZhuModel {
 		Nian: lunar.GetYear(),
 		Yue:  lunar.GetMonth(),
 		Ri:   lunar.GetDay(),
-		Shi:  "",
+		Shi:  fmt.Sprint(shi, ":", fen),
 	}
 	if r.tran(z) {
 		return z

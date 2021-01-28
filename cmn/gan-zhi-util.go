@@ -41,8 +41,6 @@ func GetNianGanZhi(lunarYear int) (gan, zhi string) {
 
 	//
 
-
-
 	return
 }
 
@@ -78,7 +76,7 @@ func GetShiGan(riGan, shiZhi string) string {
 	//
 	i := ZhiIndex(shiZhi)
 	//
-	if i > 0 {
+	if i >= 0 {
 		return l[i]
 	}
 	return ""
